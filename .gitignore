@@ -44,3 +44,8 @@ sw.js
 sw.js.map
 workbox-*.js
 workbox-*.js.map
+
+.idea
+.aider*
+appmap.log
+.idea/vcs.xml
