@@ -1,106 +1,27 @@
-import { LLM } from "@/types"
+import { LLM, OpenAILLMID } from "@/types"
 
-const OPENAI_PLATORM_LINK = "https://platform.openai.com/docs/overview"
-
-// OpenAI Models (UPDATED 1/25/24) -----------------------------
-const GPT4o: LLM = {
-  modelId: "gpt-4o",
-  modelName: "GPT-4o",
-  provider: "openai",
-  hostedId: "gpt-4o",
-  platformLink: OPENAI_PLATORM_LINK,
-  imageInput: true,
-  pricing: {
-    currency: "USD",
-    unit: "1M tokens",
-    inputCost: 5,
-    outputCost: 15
-  }
-}
-
-const GPT4oMini: LLM = {
-  modelId: "gpt-4o-mini",
-  modelName: "GPT-4o Mini",
-  provider: "openai",
-  hostedId: "gpt-4o-mini",
-  platformLink: OPENAI_PLATORM_LINK,
-  imageInput: true,
-  pricing: {
-    currency: "USD",
-    unit: "1M tokens",
-    inputCost: 0.15,
-    outputCost: 0.6
-  }
-}
-
-// GPT-4 Turbo (UPDATED 1/25/24)
-const GPT4Turbo: LLM = {
-  modelId: "gpt-4-turbo-preview",
-  modelName: "GPT-4 Turbo",
-  provider: "openai",
-  hostedId: "gpt-4-turbo-preview",
-  platformLink: OPENAI_PLATORM_LINK,
-  imageInput: true,
-  pricing: {
-    currency: "USD",
-    unit: "1M tokens",
-    inputCost: 10,
-    outputCost: 30
-  }
-}
-
-// GPT-4 Vision (UPDATED 12/18/23)
-const GPT4Vision: LLM = {
-  modelId: "gpt-4-vision-preview",
-  modelName: "GPT-4 Vision",
-  provider: "openai",
-  hostedId: "gpt-4-vision-preview",
-  platformLink: OPENAI_PLATORM_LINK,
-  imageInput: true,
-  pricing: {
-    currency: "USD",
-    unit: "1M tokens",
-    inputCost: 10
-  }
-}
-
-// GPT-4 (UPDATED 1/29/24)
-const GPT4: LLM = {
-  modelId: "gpt-4",
-  modelName: "GPT-4",
-  provider: "openai",
-  hostedId: "gpt-4",
-  platformLink: OPENAI_PLATORM_LINK,
-  imageInput: false,
-  pricing: {
-    currency: "USD",
-    unit: "1M tokens",
-    inputCost: 30,
-    outputCost: 60
-  }
-}
-
-// GPT-3.5 Turbo (UPDATED 1/25/24)
-const GPT3_5Turbo: LLM = {
-  modelId: "gpt-3.5-turbo",
-  modelName: "GPT-3.5 Turbo",
-  provider: "openai",
-  hostedId: "gpt-3.5-turbo",
-  platformLink: OPENAI_PLATORM_LINK,
-  imageInput: false,
-  pricing: {
-    currency: "USD",
-    unit: "1M tokens",
-    inputCost: 0.5,
-    outputCost: 1.5
+function createLLM(id: OpenAILLMID, modelName: string, imageInput: boolean, inputCost: number, outputCost?: number): LLM {
+  return {
+    modelId: id,
+    modelName,
+    provider: "openai",
+    hostedId: id,
+    platformLink: "https://platform.openai.com/docs/overview",
+    imageInput,
+    pricing: {
+      currency: "USD",
+      unit: "1M tokens",
+      inputCost,
+      outputCost
+    }
   }
 }
 
 export const OPENAI_LLM_LIST: LLM[] = [
-  GPT4o,
-  GPT4oMini,
-  GPT4Turbo,
-  GPT4Vision,
-  GPT4,
-  GPT3_5Turbo
+ createLLM("gpt-4o", "GPT-4o", true, 5, 15),
+ createLLM("gpt-4o-mini", "GPT-4o Mini", true, 0.15, 0.6),
+ createLLM("gpt-4-turbo-preview", "GPT-4 Turbo", true, 10, 30),
+ createLLM("gpt-4-vision-preview", "GPT-4 Vision", true, 10),
+ createLLM("gpt-4", "GPT-4", false, 30, 60),
+ createLLM("gpt-3.5-turbo", "GPT-3.5 Turbo", false, 0.5, 1.5)
 ]
